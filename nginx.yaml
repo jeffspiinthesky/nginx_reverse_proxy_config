@@ -1,0 +1,13 @@
+services:
+  nginx:
+    image: nginx:latest
+    container_name: nginx_ssl_demo
+    volumes:
+      - /home/pi/nginx_demo/nginx.conf:/etc/nginx/conf.d/default.conf:ro
+      - /home/pi/nginx_demo/pki/public_keys/jpits-52431.ddns.net.crt:/etc/ssl/jpits-52431.ddns.net.crt
+      - /home/pi/nginx_demo/pki/private_keys/jpits-52431.ddns.net.key:/etc/ssl/jpits-52431.ddns.net.key
+      - /home/pi/nginx_demo/pki/public_keys/rootCA.crt:/etc/ssl/rootCA.crt
+    ports:
+      - 8080:80
+      - 443:443
+    restart: 'unless-stopped'
